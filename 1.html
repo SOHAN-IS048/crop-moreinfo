@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crop Recommendation — Model Accuracy</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-1: #eef8f6;
+      --bg-2: #f6fbff;
+      --card: #ffffff;
+      --accent: #0f7a4f;
+      --accent-2: #2aa06b;
+      --muted: #667085;
+      --glass: rgba(255,255,255,0.65);
+      --shadow-md: 0 8px 20px rgba(8,11,15,0.06);
+      --shadow-lg: 0 20px 40px rgba(8,11,15,0.08);
+      font-family: "Inter", sans-serif;
+    }
+
+    body{ margin:0; background:linear-gradient(180deg,var(--bg-1),var(--bg-2)); }
+
+    .wrap{ max-width:1200px; margin:28px auto; padding:28px; }
+
+    /* -------------------------------- Header -------------------------------- */
+    header.hero{
+      display:flex; gap:22px; align-items:center; padding:28px;
+      border-radius:16px; background:linear-gradient(90deg,rgba(6,50,28,0.08),rgba(20,150,90,0.03));
+      box-shadow:var(--shadow-lg);
+    }
+    .hero .left{
+      width:120px;height:120px;border-radius:18px;
+      background:linear-gradient(160deg,#0f7a4f,#7ad29b);
+      display:flex;align-items:center;justify-content:center;color:white;
+      box-shadow:0 8px 30px rgba(15,122,79,0.18);
+    }
+    .hero .left img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+      border-radius: 12px; /* optional */
+    }
+
+    .hero .right h1{margin:0;font-size:30px;font-weight:800;color:var(--accent);}
+    .hero .right p{margin:10px 0 0;font-size:15px;color:var(--muted);max-width:700px;}
+
+    /* -------------------------------- Gallery Cards -------------------------------- */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:20px;}
+
+    .card{
+      background:linear-gradient(180deg,#fff,#f8fffa);
+      padding:14px;border-radius:14px;box-shadow:var(--shadow-md);
+      transition:.3s;cursor:pointer;display:flex;flex-direction:column;
+    }
+    .card:hover{ transform:translateY(-6px); box-shadow:0 30px 60px rgba(8,11,15,0.12); }
+
+    .thumb{height:170px;border-radius:10px;overflow:hidden;background:#f2f7f5;border:1px solid #e8efec;}
+    .thumb img{width:100%;height:100%;object-fit:cover;}
+
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+    .name{font-weight:700;color:#07331c;}
+    .sub{font-size:13px;color:var(--muted);}
+
+    .badge{
+      background:#e7f9ee;color:var(--accent-2);padding:8px 12px;border-radius:999px;
+      font-weight:700;font-size:13px;
+    }
+
+    .card-footer{display:flex;justify-content:space-between;margin-top:12px;}
+    .sm-btn{border:0;background:transparent;color:var(--accent);font-weight:700;cursor:pointer;}
+    .download{background:var(--accent);color:white;padding:8px 12px;border-radius:10px;font-weight:700;}
+
+    /* -------------------------------- Lightbox -------------------------------- */
+    .lightbox{
+      position:fixed;inset:0;background:rgba(5,10,8,0.80);display:none;
+      align-items:center;justify-content:center;z-index:9999;padding:28px;
+    }
+    .frame{background:#012112;padding:20px;border-radius:12px;max-width:1100px;width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;}
+    .frame img{max-width:98%;max-height:70vh;border-radius:8px;box-shadow:0 25px 60px rgba(0,0,0,0.4);}
+    .caption{color:#d8ffe8;font-weight:700;}
+    .close{border:0;background:transparent;color:white;font-size:22px;cursor:pointer;}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Header -->
+    <header class="hero">
+      <div class="left">
+        <!-- place your icon file in the same folder or update src -->
+        <img src="icon.png" alt="project icon">
+      </div>
+
+      <div class="right">
+        <h1>Crop Recommendation — Model Accuracy</h1>
+        <p>High-quality algorithm performance visuals — accuracy charts, ROC curves, confusion matrices and feature importance.</p>
+      </div>
+    </header>
+
+    <!-- --------------------------- Cards Start --------------------------- -->
+    <div class="grid" id="gallery">
+
+      <!-- Random Forest -->
+      <article class="card" data-src="random forest.png" data-title="Random Forest" data-acc="92%" data-desc="Cross-validated accuracy (ensemble tree model)">
+        <div class="thumb"><img src="random forest.png" alt="Random Forest accuracy chart"></div>
+        <div class="meta">
+          <div>
+            <div class="name">Random Forest</div>
+            <div class="sub">Cross-validated accuracy (ensemble tree model)</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="random_forest.png" download>Download</a></div>
+      </article>
+
+      <!-- XGBoost -->
+      <article class="card" data-src="xgboost.png" data-title="XGBoost" data-acc="94%" data-desc="Gradient boosting — best AUC performance">
+        <div class="thumb"><img src="xgboost.png" alt="XGBoost accuracy chart"></div>
+        <div class="meta">
+          <div>
+            <div class="name">XGBoost</div>
+            <div class="sub">Gradient boosting — best AUC performance</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="xgboost.png" download>Download</a></div>
+      </article>
+
+      <!-- SVM -->
+      <article class="card" data-src="svm.png" data-title="Support Vector Machine (SVM)" data-acc="88%" data-desc="Kernel-based classifier">
+        <div class="thumb"><img src="svm.png" alt="SVM accuracy chart"></div>
+        <div class="meta">
+          <div>
+            <div class="name">SVM</div>
+            <div class="sub">Support Vector Machine — kernel-based classifier</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="svm.png" download>Download</a></div>
+      </article>
+
+      <!-- Naive Bayes -->
+      <article class="card" data-src="Naive.png" data-title="Naive Bayes" data-acc="99.39%" data-desc="Probabilistic classifier (assumes feature independence)">
+        <div class="thumb"><img src="Naive.png" alt="Naive Bayes chart"></div>
+        <div class="meta">
+          <div>
+            <div class="name">Naive Bayes</div>
+            <div class="sub">Probabilistic classifier (assumes feature independence)</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="naive_bayes.png" download>Download</a></div>
+      </article>
+
+      <!-- Correlation Matrix -->
+      <article class="card" data-src="CORELATION.png" data-title="Correlation Matrix" data-acc="100%" data-desc="Feature correlations (N, P, K, Temperature, Humidity, pH)">
+        <div class="thumb"><img src="CORELATION.png" alt="Correlation matrix"></div>
+        <div class="meta">
+          <div>
+            <div class="name">Correlation Matrix</div>
+            <div class="sub">Shows correlations among features (N, P, K, Temperature, Humidity, pH)</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="correlation_matrix.png" download>Download</a></div>
+      </article>
+
+      <!-- KNN -->
+      <article class="card" data-src="knn.png" data-title="K-Nearest Neighbors (KNN)" data-acc="97.73%" data-desc="Distance-based classifier">
+        <div class="thumb"><img src="knn.png" alt="KNN visualization"></div>
+        <div class="meta">
+          <div>
+            <div class="name">K-Nearest Neighbors (KNN)</div>
+            <div class="sub">Distance-based classification</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="knn.png" download>Download</a></div>
+      </article>
+
+      <!-- Decision Tree -->
+      <article class="card" data-src="decission.png" data-title="Decision Tree" data-acc="98.03%" data-desc="Interpretable tree-based classifier">
+        <div class="thumb"><img src="decission.png" alt="Decision Tree chart"></div>
+        <div class="meta">
+          <div>
+            <div class="name">Decision Tree</div>
+            <div class="sub">Interpretable tree-based classifier</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="decision_tree.png" download>Download</a></div>
+      </article>
+
+      <!-- Logistic Regression -->
+      <article class="card" data-src="logistic.png" data-title="Logistic Regression" data-acc="95.91%" data-desc="Linear probabilistic classifier (logistic regression)">
+        <div class="thumb"><img src="logistic.png" alt="Logistic Regression chart"></div>
+        <div class="meta">
+          <div>
+            <div class="name">Logistic Regression</div>
+            <div class="sub">Linear probabilistic classifier</div>
+          </div>
+          <div class="badge">—</div>
+        </div>
+        <div class="card-footer"><button class="sm-btn view">Preview</button><a class="download" href="logistic.png" download>Download</a></div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- --------------------------- Lightbox --------------------------- -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <div class="frame">
+      <div style="display:flex;width:100%;justify-content:space-between;">
+        <div style="color:white;font-weight:800">Preview</div>
+        <button class="close" id="closeBtn" aria-label="Close preview">✕</button>
+      </div>
+      <img id="lbImg" src="" alt="">
+      <div class="caption" id="lbCap"></div>
+      <a id="lbDown" class="download" href="#" download>Download</a>
+    </div>
+  </div>
+
+  <script>
+    // on load populate badge text from data-acc and wire preview
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = Array.from(document.querySelectorAll('.card'));
+      cards.forEach(card => {
+        const acc = (card.dataset.acc || '').trim();
+        const badge = card.querySelector('.badge');
+        // show the dataset value, fallback to '—' if empty or set to dash
+        badge.textContent = acc && acc !== '—' ? acc : '—';
+      });
+    });
+
+    // lightbox/preview behavior
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const lbDown = document.getElementById('lbDown');
+    const closeBtn = document.getElementById('closeBtn');
+
+    gallery.addEventListener('click', e => {
+      // allow clicking anywhere in the card to preview
+      const card = e.target.closest('.card');
+      if (!card) return;
+      const src = card.dataset.src;
+      const title = card.dataset.title || 'Preview';
+      const acc = card.dataset.acc || '';
+      const desc = card.dataset.desc || '';
+      lbImg.src = src;
+      lbImg.alt = title;
+      lbCap.textContent = title + (acc && acc !== '—' ? ' — ' + acc : '') + (desc ? ' • ' + desc : '');
+      lbDown.href = src;
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.onclick = () => {
+      lightbox.style.display = 'none';
+      lightbox.setAttribute('aria-hidden','true');
+      document.body.style.overflow = 'auto';
+      lbImg.src = '';
+    };
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        closeBtn.onclick();
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeBtn.onclick();
+    });
+  </script>
+
+</body>
+</html>
